@@ -9,7 +9,7 @@ monitor session 1 source vlan 20,30,40 both
 monitor session 1 destination interface GigabitEthernet0/10
 ```
 
-`Gi0/10` kobles direkte til Security Onion sin sniff-NIC og skal ikke brukes som vanlig accessport samtidig.
+Mirror interface kobles direkte til Security Onion sin sniff-NIC og skal ikke brukes som vanlig accessport samtidig.
 
 ## ERSPAN-prinsipp
 
