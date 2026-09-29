@@ -1,0 +1,63 @@
+#!/usr/local/sbin/tac_plus-ng
+
+id = spawnd {
+    background = no
+    listen { port = 49 }
+}
+
+id = tac_plus-ng {
+    log accesslog { destination = /var/log/tac_plus_ng/access.log }
+    log authorlog { destination = /var/log/tac_plus_ng/authorization.log }
+    log accountinglog { destination = /var/log/tac_plus_ng/accounting.log }
+
+    access log = accesslog
+    authorization log = authorlog
+    accounting log = accountinglog
+
+    # Demo device list. Add/remove source addresses to match the real network.
+    # Routers use Loopback10 as TACACS source in the example design;
+    # switches use their VLAN 10 management SVI.
+    device lab_devices {
+        address = 1.1.1.10
+        address = 2.2.2.10
+        address = 3.3.3.10
+        address = 10.1.10.2
+        address = 10.2.10.2
+        address = 10.3.10.2
+        address = 10.3.10.3
+        key = CHANGE_ME_TACACS_KEY
+    }
+
+    profile admin {
+        script {
+            if (service == shell) {
+                if (cmd == "") {
+                    set priv-lvl = 15
+                    permit
+                }
+                permit
+            }
+            deny
+        }
+    }
+
+    group admin { }
+
+    user admin {
+        password login = clear CHANGE_ME_TACACS_USER_PASSWORD
+        member = admin
+    }
+
+    ruleset {
+        rule allow-admin {
+            enabled = yes
+            script {
+                if (member == admin) {
+                    profile = admin
+                    permit
+                }
+                deny
+            }
+        }
+    }
+}

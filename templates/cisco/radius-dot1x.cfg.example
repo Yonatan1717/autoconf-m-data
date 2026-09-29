@@ -1,0 +1,20 @@
+aaa new-model
+!
+radius server CLIENT-RADIUS
+ address ipv4 <RADIUS_SERVER_IP> auth-port 1812 acct-port 1813
+ key <RADIUS_SHARED_SECRET>
+!
+aaa group server radius DOT1X-RADIUS
+ server name CLIENT-RADIUS
+!
+ip radius source-interface Vlan10
+aaa authentication dot1x default group DOT1X-RADIUS
+aaa authorization network default group DOT1X-RADIUS
+aaa accounting dot1x default start-stop group DOT1X-RADIUS
+dot1x system-auth-control
+!
+interface <CLIENT_INTERFACE>
+ switchport mode access
+ switchport access vlan <CLIENT_VLAN>
+ authentication port-control auto
+ dot1x pae authenticator

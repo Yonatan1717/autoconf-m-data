@@ -1,0 +1,3 @@
+---
+# Kopier til vars.yml og tilpass. vars.yml er ment å være lokal/runtime-fil.
+backup_root: "/var/backups/network-automation"

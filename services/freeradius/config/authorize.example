@@ -1,0 +1,5 @@
+# LAB TEMPLATE ONLY.
+# Replace with real identity backend / certificate policy for production.
+
+admin Cleartext-Password := "CHANGE_ME_RADIUS_USER_PASSWORD"
+    Reply-Message := "Authenticated by FreeRADIUS"

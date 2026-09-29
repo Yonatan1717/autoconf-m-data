@@ -1,0 +1,12 @@
+# Optional Ubuntu NTP service template.
+# Adjust upstream sources to match policy/environment.
+
+pool pool.ntp.org iburst
+
+# Permit only the management ranges that should use this server.
+allow 10.1.10.0/24
+allow 10.2.10.0/24
+allow 10.3.10.0/24
+
+makestep 1.0 3
+rtcsync

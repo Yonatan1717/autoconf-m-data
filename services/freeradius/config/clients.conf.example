@@ -1,0 +1,26 @@
+# Network devices allowed to use this RADIUS server.
+# Replace CHANGE_ME_RADIUS_KEY before use.
+
+client SW1-SITE-1 {
+    ipaddr = 10.1.10.2
+    secret = CHANGE_ME_RADIUS_KEY
+    shortname = SW1-SITE-1
+}
+
+client SW1-SITE-2 {
+    ipaddr = 10.2.10.2
+    secret = CHANGE_ME_RADIUS_KEY
+    shortname = SW1-SITE-2
+}
+
+client SW2-SITE-3 {
+    ipaddr = 10.3.10.3
+    secret = CHANGE_ME_RADIUS_KEY
+    shortname = SW2-SITE-3
+}
+
+client SW1-SITE-3 {
+    ipaddr = 10.3.10.2
+    secret = CHANGE_ME_RADIUS_KEY
+    shortname = SW1-SITE-3
+}

@@ -1,0 +1,30 @@
+services:
+  freeradius:
+    build:
+      context: ./freeradius
+    container_name: no-mpls-freeradius
+    restart: unless-stopped
+    ports:
+      - "${SERVICE_BIND_IP:-0.0.0.0}:1812:1812/udp"
+      - "${SERVICE_BIND_IP:-0.0.0.0}:1813:1813/udp"
+
+  tacacs-ng:
+    image: christianbecker/tac_plus-ng:latest
+    container_name: no-mpls-tacacs-ng
+    restart: unless-stopped
+    ports:
+      - "${SERVICE_BIND_IP:-0.0.0.0}:49:49/tcp"
+    volumes:
+      - ./tacacs-ng/config/tac_plus-ng.cfg:/usr/local/etc/tac_plus-ng.cfg:ro
+      - ./tacacs-ng/logs:/var/log/tac_plus_ng
+
+  syslog-ng:
+    image: balabit/syslog-ng:latest
+    container_name: no-mpls-syslog-ng
+    restart: unless-stopped
+    ports:
+      - "${SERVICE_BIND_IP:-0.0.0.0}:514:514/udp"
+      - "${SERVICE_BIND_IP:-0.0.0.0}:601:601/tcp"
+    volumes:
+      - ./syslog-ng/config/syslog-ng.conf:/etc/syslog-ng/syslog-ng.conf:ro
+      - ./syslog-ng/logs:/var/log/network

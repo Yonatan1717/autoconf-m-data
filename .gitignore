@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local input containing real secrets
+my_network.xlsx
+input/
+*.private.xlsx
+
+# Generated network configs may contain secrets
+generated/*
+!generated/README.md
+!generated/.gitkeep
+
+automation/ansible/inventory.ini
+automation/ansible/legacy_ssh.cfg
+automation/ansible/ansibleConfigs/
+automation/ansible/ansibleBootstrapConfigs/
+automation/ansible/init_config_switch/
+automation/ansible/README_GENERATED_CONFIGS.txt
+
+# Ansible backups / runtime
+backup/
+backups/
+*.retry
+automation/ansible/backup/
+automation/ansible/backups/
+
+# Service secrets / active configs
+services/freeradius/config/clients.conf
+services/freeradius/config/authorize
+services/tacacs-ng/config/tac_plus-ng.cfg
+services/tacacs-ng/logs/*
+!services/tacacs-ng/logs/.gitkeep
+services/syslog-ng/logs/*
+!services/syslog-ng/logs/.gitkeep
+.env
+*.vault.yml
+vault.yml
+
+# Certificates / keys
+*.key
+*.pem
+*.p12
+*.pfx
+
+automation/ansible/vars.yml

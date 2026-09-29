@@ -1,0 +1,14 @@
+service timestamps log datetime msec show-timezone
+logging host <SYSLOG_SERVER_IP> transport udp port 514
+logging trap informational
+logging buffered 16384 informational
+!
+ntp server <NTP_SERVER_IP>
+!
+ip access-list standard SNMP-NMS-ONLY
+ permit host <NMS_IP>
+ deny any
+!
+snmp-server view NMS-READ iso included
+snmp-server group NMS v3 priv read NMS-READ access SNMP-NMS-ONLY
+snmp-server user <SNMP_USER> NMS v3 auth sha <SNMP_AUTH_SECRET> priv aes 128 <SNMP_PRIV_SECRET>

@@ -1,0 +1,15 @@
+aaa new-model
+!
+tacacs server TACACS-SERVER
+ address ipv4 <TACACS_SERVER_IP>
+ key <TACACS_SHARED_SECRET>
+!
+aaa group server tacacs+ TACACS-GROUP
+ server name TACACS-SERVER
+ ip vrf forwarding MGMT
+ ip tacacs source-interface Loopback10
+!
+aaa authentication login default group TACACS-GROUP local
+aaa authorization exec default group TACACS-GROUP local
+aaa accounting exec default start-stop group TACACS-GROUP
+aaa accounting commands 15 default start-stop group TACACS-GROUP
